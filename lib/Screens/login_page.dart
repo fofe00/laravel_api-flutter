@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laravel_api/Screens/home_page.dart';
 import 'package:laravel_api/Screens/register_page.dart';
 
 class Login extends StatefulWidget {
@@ -75,6 +76,8 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       print("login in progress");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
                     }
                   },
                   child: Text("Login "),
