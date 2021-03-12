@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                       print("login in progress");
                     }
                   },
-                  child: Text("Register page"),
+                  child: Text("Login "),
                 ),
                 SizedBox(
                   height: 20,

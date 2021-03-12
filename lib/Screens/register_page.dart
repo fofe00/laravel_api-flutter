@@ -126,7 +126,7 @@ class _RegisterState extends State<Register> {
                       print("Register in progress");
                     }
                   },
-                  child: Text("Register page"),
+                  child: Text("Register "),
                 ),
                 SizedBox(
                   height: 20,
