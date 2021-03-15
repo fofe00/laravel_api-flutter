@@ -1,23 +1,16 @@
-import 'package:provider/provider.dart';
+import 'dart:convert';
 
-class User {
-  int _id;
-  String _name;
-  String _email;
-  String _token;
-  setname(name) {
-    _name = name;
+import 'package:flutter/foundation.dart';
+import 'package:laravel_api/helpers/http_helper.dart';
+import 'package:laravel_api/model/user_model.dart';
+
+class UserProvider with ChangeNotifier {
+  UserModel myUser = UserModel();
+
+  Future<UserModel> getMyUser(Map data) async {
+    UserModel result;
+    var body = await MyHttpRequest().postData("login1", data);
+    result = UserModel.fromJson(json.decode(body));
+    return result;
   }
-
-  setEmail(email) {
-    _email = email;
-  }
-
-  setToken(token) {
-    _token = token;
-  }
-
-  String get name => _name;
-  String get email => _email;
-  String get token => _token;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:laravel_api/Screens/home_page.dart';
 import 'package:laravel_api/Screens/register_page.dart';
+import 'package:laravel_api/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,8 +10,11 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String pwd = "";
   @override
   Widget build(BuildContext context) {
+    var myUser = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -32,6 +36,7 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   onChanged: (value) {
                     print(value);
+                    email = value;
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -52,6 +57,7 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   onChanged: (value) {
                     print(value);
+                    pwd = value;
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -73,14 +79,21 @@ class _LoginState extends State<Login> {
                 RaisedButton(
                   color: Colors.blue,
                   textColor: Colors.white,
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       print("login in progress");
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Map myPost = {
+                        "email": "ainix@gmail.com",
+                      };
+                      myPost["password"] = "fofe";
+
+                      var test = await UserProvider().getMyUser(myPost);
+                      print(test.name);
+                      //Navigator.push(context,
+                      // MaterialPageRoute(builder: (context) => HomePage()));
                     }
                   },
-                  child: Text("Login "),
+                  child: Text("Login"),
                 ),
                 SizedBox(
                   height: 20,
@@ -88,7 +101,7 @@ class _LoginState extends State<Login> {
                 GestureDetector(
                   child: Center(child: Text("I am not a user")),
                   onTap: () {
-                    print("go to rgister");
+                    print("go to register");
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Register()));
                   },
